@@ -5,7 +5,7 @@ import os.path
 import io
 import serial
 
-ser = serial.Serial("/dev/ttyACM0",9600, timeout= 2)
+#ser = serial.Serial("/dev/ttyACM0",9600, timeout= 2)
 
 def invoke_subprocess(bufsize):
     #return subprocess.Popen(os.path.join(os.getcwd(), 'realtime_text'), shell=True, stdout=subprocess.PIPE, bufsize=bufsize)
@@ -32,7 +32,7 @@ while True:
 
 	print "fire!!!!!"
 
-ser.write("1")
+#ser.write("1")
     	
 
     	
