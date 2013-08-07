@@ -1,4 +1,6 @@
 *.o
+firecontrol_eyeball
+*.pyc
 lib/
 test/example
 test/realtime
