@@ -18,21 +18,30 @@ def io_open():
         yield line.rstrip('\n')
 
 
-while True:
-	print "start"
-	counter = 0
-	for line in io_open():
-		if not '0' in line:
-			counter +=1
-			if counter == 5:
-				break
-		else:
-			counter = 0
-			print counter
 
-	print "fire!!!!!"
+print "start"
+ready = True
+marker_count = 0
+absent_count = 0
+reps_required = 5
 
-ser.write("1")
+for line in io_open():
+	if not '0' in line:
+		marker_count +=1
+        if (marker_count >= reps_required) and (ready == True):
+            print "Fire!!!"
+            # ser.write("1")
+            marker_count = 0
+            ready = False
+        else:
+            pass
+    elif '0' in line:
+        absent_count +=1
+        if absent_count >= reps_required:
+            print "Reset"
+            absent_count = 0
+            ready = True
+
     	
 
     	
