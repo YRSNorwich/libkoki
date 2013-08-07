@@ -16,5 +16,17 @@ def io_open():
 
 
 print "start"
+counter = 0
 for line in io_open():
-    print line + ' intercepted'
+    if not '0' in line:
+    	counter +=1
+    	if counter == 5:
+    		break
+    else:
+    	counter = 0
+    	print counter
+
+print "fire!!!!!"
+    	
+
+    	
