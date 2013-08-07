@@ -24,9 +24,16 @@ void loop()
     
     fire =Serial.parseInt();
     if (fire == 1){
-      trigger.write(60);
-      delay(100);
+      trigger.write(120);
+    }
+  
+    
+    if (fire == 2){
       trigger.write(0);
     }
-  }
-} 
+  
+  
+  
+  
+    } 
+}
