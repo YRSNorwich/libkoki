@@ -2,6 +2,7 @@
 
 import subprocess
 import os.path
+import sys
 import io
 import serial
 from tested.robot import Robot
@@ -14,8 +15,8 @@ def invoke_subprocess(bufsize):
 
  
 def io_open():
-    p = invoke_subprocess(0)
-    for line in io.open(p.stdout.fileno()):
+    proc = invoke_subprocess(0)
+    for line in io.open(proc.stdout.fileno()):
         yield line.rstrip('\n')
 
 R = Robot()
@@ -25,25 +26,24 @@ marker_count = 0
 absent_count = 0
 reps_required = 10
 
-for line in io_open():
-    if not '0' in line:
-    	marker_count +=1
-        if (marker_count >= reps_required) and (ready == True):
-            ready = False
-            print "Fire!!!"
-            R.servos[0].angle = 76
-            marker_count = 0
-        else:
-            pass
-    elif '0' in line:
-        absent_count +=1
-        if absent_count >= reps_required and ready == False:
-            ready = True
-            absent_count = 0
-            print "Reset"
-            R.servos[0].angle = 4
+try:
+    for line in io_open():
+        if not '0' in line:
+            marker_count +=1
+            if (marker_count >= reps_required) and (ready == True):
+                ready = False
+                print "Fire!!!"
+                #R.servos[0].angle = 76
+                marker_count = 0
+            else:
+                pass
+        elif '0' in line:
+            absent_count +=1
+            if absent_count >= reps_required and ready == False:
+                ready = True
+                absent_count = 0
+                print "Reset"
+                R.servos[0].angle = 4
 
-
-    	
-
-    	
+except (KeyboardInterrupt):
+    sys.exit()
