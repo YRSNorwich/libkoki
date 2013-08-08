@@ -22,18 +22,12 @@ void loop()
 { 
   if (Serial.available()>0){
     
-    fire =Serial.parseInt();
-    if (fire == 1){
-      trigger.write(120);
+    fire = Serial.parseInt();
+    if (fire==1){
+    trigger.write(90);
+    time.delay(3000);
+    trigger.write(0);
     }
-  
-    
-    if (fire == 2){
-      trigger.write(0);
-    }
-  
-  
-  
-  
-    } 
+  }
+
 }
